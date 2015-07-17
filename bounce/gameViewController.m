@@ -52,7 +52,9 @@ NSTimeInterval normalDropTime = 0.8;
 - (void)setupGame
 {
     // set up bar and tap recognizer
-    self.bar = [[barView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 80, 80.0f, 8.0f)];
+    CGFloat initialY = self.view.bounds.size.height - 80;
+    self.bar = [[barView alloc] initWithFrame:CGRectMake(0, initialY, 80.0f, 8.0f)];
+    self.bar.center = CGPointMake(self.view.bounds.size.width / 2, initialY);
     [self.view addSubview:self.bar];
     UITapGestureRecognizer *tappedbar =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapMoveBar:)];
     [self.barRegion addGestureRecognizer:tappedbar];
@@ -100,6 +102,7 @@ NSTimeInterval normalDropTime = 0.8;
         CALayer *barLayer = (CALayer*)[self.bar.layer presentationLayer];
         if (bubble.center.y > self.bar.center.y) {
             [bubble removeFromSuperview];
+            [self.bubbleArray removeObject:bubble];
         }
         if(CGRectIntersectsRect(bubbleLayer.frame, barLayer.frame))
         {
@@ -133,7 +136,7 @@ NSTimeInterval normalDropTime = 0.8;
 
 - (void)fallBubble:(bubbleView *)bubble xLocation:(CGFloat)xLocation
 {
-    CGRect fin = CGRectMake(xLocation, self.view.bounds.size.height - 85, bubbleDimension, bubbleDimension);
+    CGRect fin = CGRectMake(xLocation, self.view.bounds.size.height - 90, bubbleDimension, bubbleDimension);
     [UIView animateWithDuration:normalDropTime
                      animations:^{
                          bubble.frame = fin;
