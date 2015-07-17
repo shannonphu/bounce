@@ -13,12 +13,18 @@
 CGFloat bubbleDimension = 18.0f;
 NSTimeInterval normalDropTime = 0.8;
 
-@interface gameViewController () <UIGestureRecognizerDelegate>
+@interface gameViewController () <UIGestureRecognizerDelegate, UICollisionBehaviorDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *barRegion;
 @property (strong, nonatomic) NSMutableArray *bubbleArray;
 @property (weak, nonatomic) IBOutlet UILabel *bottomBorder;
 @property (strong, nonatomic) barView *bar;
 @property (strong, nonatomic) NSTimer *timer;
+
+
+@property (nonatomic) UIDynamicAnimator *animator;
+@property (strong, nonatomic) UIGravityBehavior *gravity;
+
 @end
 
 @implementation gameViewController
@@ -61,6 +67,10 @@ NSTimeInterval normalDropTime = 0.8;
     [self.barRegion addGestureRecognizer:tappedbar];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(play) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(checkCollision) userInfo:nil repeats:YES];
+    
+    _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    self.gravity = [[UIGravityBehavior alloc] init];
+    [_animator addBehavior:self.gravity];
 }
 
 - (void)singleTapMoveBar:(UITapGestureRecognizer *)recognizer
@@ -105,8 +115,12 @@ NSTimeInterval normalDropTime = 0.8;
         
         if(CGRectIntersectsRect(bubbleLayer.frame, barLayer.frame))
         {
+            //[self pauseLayer:bubbleLayer];
+            self.bar.hit = YES;
+            [self.bar setNeedsDisplay];
             [self reboundBubble:bubble];
             NSLog(@"rebound detected");
+            
         }
         
         if (CGRectIntersectsRect(bubbleLayer.frame, self.bottomBorder.frame)) {
@@ -136,15 +150,17 @@ NSTimeInterval normalDropTime = 0.8;
     [self fallBubble:newBubble xLocation:xLocation];
     // add subview
     [self.view addSubview:newBubble];
+    
+    [self.gravity addItem:newBubble];
 }
 
 - (void)fallBubble:(bubbleView *)bubble xLocation:(CGFloat)xLocation
 {
-    CGRect fin = CGRectMake(xLocation, self.view.bounds.size.height - 90, bubbleDimension, bubbleDimension);
+    /*CGRect fin = CGRectMake(xLocation, self.view.bounds.size.height - 90, bubbleDimension, bubbleDimension);
     
     [UIView animateWithDuration:normalDropTime + 1
                           delay:0
-         usingSpringWithDamping:0.9
+         usingSpringWithDamping:0.7
           initialSpringVelocity:1.0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
@@ -153,6 +169,8 @@ NSTimeInterval normalDropTime = 0.8;
                      completion:^(BOOL finished) {
                          //Completion Block
                      }];
+    */
+    
 }
 
 - (void)reboundBubble:(bubbleView *)bubble
@@ -163,11 +181,29 @@ NSTimeInterval normalDropTime = 0.8;
     [UIView animateWithDuration:normalDropTime
                      animations:^{
                          bubble.frame = fin;
+                         //[self resumeLayer:bubble.layer];
                          //[self.view addSubview:bubble];
                      } completion:^(BOOL finished) {
                          [self fallBubble:bubble xLocation:bubble.center.x];
                      }];
+    self.bar.hit = NO;
+    [self.bar setNeedsDisplay];
     
+}
+
+-(void)pauseLayer:(CALayer*)layer {
+    CFTimeInterval pausedTime = [layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    layer.speed = 0.0;
+    layer.timeOffset = pausedTime;
+}
+
+-(void)resumeLayer:(CALayer*)layer {
+    CFTimeInterval pausedTime = [layer timeOffset];
+    layer.speed = 1.0;
+    layer.timeOffset = 0.0;
+    layer.beginTime = 0.0;
+    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    layer.beginTime = timeSincePause;
 }
 
 - (void)setBubbleColors:(bubbleView *)bubble
