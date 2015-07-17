@@ -84,6 +84,7 @@
                     <navigationItem key="navigationItem" id="y6K-KI-YF5"/>
                     <connections>
                         <outlet property="barRegion" destination="R6R-KX-XA2" id="dsi-uh-U9A"/>
+                        <outlet property="bottomBorder" destination="a2R-QN-Jg0" id="pnn-0F-ZsA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ShH-h9-bVO" userLabel="First Responder" sceneMemberID="firstResponder"/>

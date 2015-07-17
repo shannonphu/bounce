@@ -16,6 +16,7 @@ NSTimeInterval normalDropTime = 0.8;
 @interface gameViewController () <UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *barRegion;
 @property (strong, nonatomic) NSMutableArray *bubbleArray;
+@property (weak, nonatomic) IBOutlet UILabel *bottomBorder;
 @property (strong, nonatomic) barView *bar;
 @property (strong, nonatomic) NSTimer *timer;
 @end
@@ -94,20 +95,23 @@ NSTimeInterval normalDropTime = 0.8;
     [self addBubble];
 }
 
-// PROBLEMATIC PART BUBBLES WONT DISAPPEAR
+                                                                                            // PROBLEMATIC PART BUBBLES WONT DISAPPEAR
+                                                                                            // PROGRAM CRASH WHEN REMOVE BUBBLE FROM ARRAY
 - (void)checkCollision
 {
     for (bubbleView *bubble in self.bubbleArray) {
         CALayer *bubbleLayer = (CALayer*)[bubble.layer presentationLayer];
         CALayer *barLayer = (CALayer*)[self.bar.layer presentationLayer];
-        if (bubble.center.y > self.bar.center.y) {
-            [bubble removeFromSuperview];
-            [self.bubbleArray removeObject:bubble];
-        }
+        
         if(CGRectIntersectsRect(bubbleLayer.frame, barLayer.frame))
         {
-            //[bubble removeFromSuperview];
             [self reboundBubble:bubble];
+            NSLog(@"rebound detected");
+        }
+        
+        if (CGRectIntersectsRect(bubbleLayer.frame, self.bottomBorder.frame)) {
+            [bubble removeFromSuperview];
+            //[self.bubbleArray removeObject:bubble];
         }
     }
 }
@@ -137,22 +141,29 @@ NSTimeInterval normalDropTime = 0.8;
 - (void)fallBubble:(bubbleView *)bubble xLocation:(CGFloat)xLocation
 {
     CGRect fin = CGRectMake(xLocation, self.view.bounds.size.height - 90, bubbleDimension, bubbleDimension);
-    [UIView animateWithDuration:normalDropTime
+    
+    [UIView animateWithDuration:normalDropTime + 1
+                          delay:0
+         usingSpringWithDamping:0.9
+          initialSpringVelocity:1.0
+                        options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          bubble.frame = fin;
-                     } completion:^(BOOL finished) {
-                         [self checkCollision];
+                     }
+                     completion:^(BOOL finished) {
+                         //Completion Block
                      }];
 }
 
 - (void)reboundBubble:(bubbleView *)bubble
 {
+    NSLog(@"rebound");
     CGFloat newY = [self randomYLocation];
     CGRect fin = CGRectMake(bubble.center.x, newY, bubbleDimension, bubbleDimension);
     [UIView animateWithDuration:normalDropTime
                      animations:^{
                          bubble.frame = fin;
-                         [self.view addSubview:bubble];
+                         //[self.view addSubview:bubble];
                      } completion:^(BOOL finished) {
                          [self fallBubble:bubble xLocation:bubble.center.x];
                      }];
