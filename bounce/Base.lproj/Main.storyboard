@@ -57,14 +57,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a2R-QN-Jg0">
-                                <rect key="frame" x="0.0" y="532" width="320" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.41000000000000003" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qcD-qi-mr3">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -74,17 +66,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="R6R-KX-XA2">
-                                <rect key="frame" x="0.0" y="472" width="320" height="40"/>
+                                <rect key="frame" x="0.0" y="476" width="320" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FGx-eN-3ZE">
+                                <rect key="frame" x="0.0" y="500" width="320" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.082865490704541037" green="0.22954199592809038" blue="0.28263099747474751" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="y6K-KI-YF5"/>
                     <connections>
                         <outlet property="barRegion" destination="R6R-KX-XA2" id="dsi-uh-U9A"/>
-                        <outlet property="bottomBorder" destination="a2R-QN-Jg0" id="pnn-0F-ZsA"/>
+                        <outlet property="killZone" destination="FGx-eN-3ZE" id="V7M-sX-leb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ShH-h9-bVO" userLabel="First Responder" sceneMemberID="firstResponder"/>

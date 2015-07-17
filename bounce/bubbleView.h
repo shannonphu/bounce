@@ -12,4 +12,6 @@
 @property (nonatomic) CGFloat red;
 @property (nonatomic) CGFloat green;
 @property (nonatomic) CGFloat blue;
+@property (nonatomic) BOOL active;
+@property (nonatomic) BOOL hit;
 @end

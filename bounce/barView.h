@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface barView : UIView
-@property (nonatomic) BOOL hit;
 @end

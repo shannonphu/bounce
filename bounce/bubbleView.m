@@ -16,6 +16,8 @@
     self.backgroundColor = nil;
     self.opaque = NO;
     self.contentMode = UIViewContentModeRedraw;
+    self.active = YES;
+    self.hit = NO;
     return self;
 }
 
@@ -24,7 +26,16 @@
     [bubblePath addClip];
     [[UIColor colorWithRed:self.red green:self.green blue:self.blue alpha:1] setFill];
     [bubblePath fill];
-    
+}
+
+- (void)removeFromSuperview
+{
+    if (self.hit) {
+        self.hit = NO;
+        return;
+    }
+    self.active = NO;
+    [super removeFromSuperview];
 }
 
 
