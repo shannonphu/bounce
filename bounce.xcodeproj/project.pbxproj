@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FBE0B2671B59AF7800FBA05C /* killZoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0B2661B59AF7800FBA05C /* killZoneView.m */; };
+		FBE0B26A1B59BC6B00FBA05C /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0B2691B59BC6B00FBA05C /* Globals.m */; };
 		FBF3B8461B587761006BFAFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF3B8451B587761006BFAFA /* main.m */; };
 		FBF3B8491B587761006BFAFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF3B8481B587761006BFAFA /* AppDelegate.m */; };
 		FBF3B84C1B587761006BFAFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF3B84B1B587761006BFAFA /* ViewController.m */; };
@@ -31,6 +33,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FBE0B2651B59AF7800FBA05C /* killZoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = killZoneView.h; sourceTree = "<group>"; };
+		FBE0B2661B59AF7800FBA05C /* killZoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = killZoneView.m; sourceTree = "<group>"; };
+		FBE0B2681B59BC6B00FBA05C /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		FBE0B2691B59BC6B00FBA05C /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		FBF3B8401B587761006BFAFA /* bounce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bounce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBF3B8441B587761006BFAFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FBF3B8451B587761006BFAFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -138,6 +144,8 @@
 				FBF3B84B1B587761006BFAFA /* ViewController.m */,
 				FBF3B86E1B5880F9006BFAFA /* gameViewController.h */,
 				FBF3B86F1B5880F9006BFAFA /* gameViewController.m */,
+				FBE0B2681B59BC6B00FBA05C /* Globals.h */,
+				FBE0B2691B59BC6B00FBA05C /* Globals.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -151,6 +159,8 @@
 				FBF3B8741B5884A2006BFAFA /* barView.m */,
 				FBF3B8761B58BDD3006BFAFA /* bubbleView.h */,
 				FBF3B8771B58BDD3006BFAFA /* bubbleView.m */,
+				FBE0B2651B59AF7800FBA05C /* killZoneView.h */,
+				FBE0B2661B59AF7800FBA05C /* killZoneView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -256,9 +266,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBF3B8751B5884A2006BFAFA /* barView.m in Sources */,
+				FBE0B26A1B59BC6B00FBA05C /* Globals.m in Sources */,
 				FBF3B8701B5880F9006BFAFA /* gameViewController.m in Sources */,
 				FBF3B8781B58BDD3006BFAFA /* bubbleView.m in Sources */,
 				FBF3B86D1B587C90006BFAFA /* customHomeButtonView.m in Sources */,
+				FBE0B2671B59AF7800FBA05C /* killZoneView.m in Sources */,
 				FBF3B84C1B587761006BFAFA /* ViewController.m in Sources */,
 				FBF3B8491B587761006BFAFA /* AppDelegate.m in Sources */,
 				FBF3B8461B587761006BFAFA /* main.m in Sources */,
@@ -456,6 +468,7 @@
 				FBF3B8651B587761006BFAFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FBF3B8661B587761006BFAFA /* Build configuration list for PBXNativeTarget "bounceTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +477,7 @@
 				FBF3B8681B587761006BFAFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface gameViewController : UIViewController
-
+@property (nonatomic) BOOL paused;
 @end
