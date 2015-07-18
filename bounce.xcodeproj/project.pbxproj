@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		FBE0B2671B59AF7800FBA05C /* killZoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0B2661B59AF7800FBA05C /* killZoneView.m */; };
 		FBE0B26A1B59BC6B00FBA05C /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0B2691B59BC6B00FBA05C /* Globals.m */; };
+		FBE0B26D1B59DDBA00FBA05C /* Colours.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0B26C1B59DDBA00FBA05C /* Colours.m */; };
+		FBE0B2701B59DE4500FBA05C /* colorSchemeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0B26F1B59DE4500FBA05C /* colorSchemeViewController.m */; };
+		FBE0B2731B59E39300FBA05C /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE0B2721B59E39300FBA05C /* homeViewController.m */; };
 		FBF3B8461B587761006BFAFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF3B8451B587761006BFAFA /* main.m */; };
 		FBF3B8491B587761006BFAFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF3B8481B587761006BFAFA /* AppDelegate.m */; };
 		FBF3B84C1B587761006BFAFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF3B84B1B587761006BFAFA /* ViewController.m */; };
@@ -37,6 +40,12 @@
 		FBE0B2661B59AF7800FBA05C /* killZoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = killZoneView.m; sourceTree = "<group>"; };
 		FBE0B2681B59BC6B00FBA05C /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		FBE0B2691B59BC6B00FBA05C /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
+		FBE0B26B1B59DDBA00FBA05C /* Colours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colours.h; sourceTree = "<group>"; };
+		FBE0B26C1B59DDBA00FBA05C /* Colours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colours.m; sourceTree = "<group>"; };
+		FBE0B26E1B59DE4500FBA05C /* colorSchemeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colorSchemeViewController.h; sourceTree = "<group>"; };
+		FBE0B26F1B59DE4500FBA05C /* colorSchemeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = colorSchemeViewController.m; sourceTree = "<group>"; };
+		FBE0B2711B59E39300FBA05C /* homeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = homeViewController.h; sourceTree = "<group>"; };
+		FBE0B2721B59E39300FBA05C /* homeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homeViewController.m; sourceTree = "<group>"; };
 		FBF3B8401B587761006BFAFA /* bounce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bounce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBF3B8441B587761006BFAFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FBF3B8451B587761006BFAFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -105,6 +114,8 @@
 				FBF3B84D1B587761006BFAFA /* Main.storyboard */,
 				FBF3B8521B587761006BFAFA /* LaunchScreen.xib */,
 				FBF3B8431B587761006BFAFA /* Supporting Files */,
+				FBE0B26B1B59DDBA00FBA05C /* Colours.h */,
+				FBE0B26C1B59DDBA00FBA05C /* Colours.m */,
 			);
 			path = bounce;
 			sourceTree = "<group>";
@@ -142,8 +153,12 @@
 			children = (
 				FBF3B84A1B587761006BFAFA /* ViewController.h */,
 				FBF3B84B1B587761006BFAFA /* ViewController.m */,
+				FBE0B2711B59E39300FBA05C /* homeViewController.h */,
+				FBE0B2721B59E39300FBA05C /* homeViewController.m */,
 				FBF3B86E1B5880F9006BFAFA /* gameViewController.h */,
 				FBF3B86F1B5880F9006BFAFA /* gameViewController.m */,
+				FBE0B26E1B59DE4500FBA05C /* colorSchemeViewController.h */,
+				FBE0B26F1B59DE4500FBA05C /* colorSchemeViewController.m */,
 				FBE0B2681B59BC6B00FBA05C /* Globals.h */,
 				FBE0B2691B59BC6B00FBA05C /* Globals.m */,
 			);
@@ -268,12 +283,15 @@
 				FBF3B8751B5884A2006BFAFA /* barView.m in Sources */,
 				FBE0B26A1B59BC6B00FBA05C /* Globals.m in Sources */,
 				FBF3B8701B5880F9006BFAFA /* gameViewController.m in Sources */,
+				FBE0B2701B59DE4500FBA05C /* colorSchemeViewController.m in Sources */,
 				FBF3B8781B58BDD3006BFAFA /* bubbleView.m in Sources */,
 				FBF3B86D1B587C90006BFAFA /* customHomeButtonView.m in Sources */,
+				FBE0B26D1B59DDBA00FBA05C /* Colours.m in Sources */,
 				FBE0B2671B59AF7800FBA05C /* killZoneView.m in Sources */,
 				FBF3B84C1B587761006BFAFA /* ViewController.m in Sources */,
 				FBF3B8491B587761006BFAFA /* AppDelegate.m in Sources */,
 				FBF3B8461B587761006BFAFA /* main.m in Sources */,
+				FBE0B2731B59E39300FBA05C /* homeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

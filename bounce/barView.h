@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface barView : UIView
+@property (strong, nonatomic) UIColor *barColor;
 @end

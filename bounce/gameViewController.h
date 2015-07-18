@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "ViewController.h"
 
-@interface gameViewController : UIViewController
+@interface gameViewController : ViewController
 @property (nonatomic) BOOL paused;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "bubbleView.h"
+#import "Globals.h"
 
 @implementation bubbleView
 
@@ -24,7 +25,7 @@
 - (void)drawRect:(CGRect)rect {
     UIBezierPath *bubblePath = [UIBezierPath bezierPathWithOvalInRect:rect];
     [bubblePath addClip];
-    [[UIColor colorWithRed:self.red green:self.green blue:self.blue alpha:1] setFill];
+    [self.bubbleColor setFill];
     [bubblePath fill];
 }
 

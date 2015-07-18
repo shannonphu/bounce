@@ -9,6 +9,12 @@
 #import "Globals.h"
 #import "bubbleView.h"
 #import "barView.h"
+#import "Colours.h"
+#import "ViewController.h"
+
+@interface Globals ()
+
+@end
 
 @implementation Globals
 
@@ -17,11 +23,11 @@
     return (CGFloat)rand()/RAND_MAX;
 }
 
-+ (void)setBubbleColors:(bubbleView *)bubble
++ (void)setBubbleColors:(bubbleView *)bubble colorChoices:(NSArray *)palette
 {
-    bubble.red = [self randValBetw0And1];
-    bubble.green = [self randValBetw0And1];
-    bubble.blue = [self randValBetw0And1];
+    NSMutableArray *bubbleColorChoices = [NSMutableArray arrayWithObjects:palette.firstObject, [palette objectAtIndex:1], [palette objectAtIndex:2], [UIColor linenColor], [UIColor grayColor], nil];
+    NSUInteger index = rand() % [bubbleColorChoices count];
+    bubble.bubbleColor = [bubbleColorChoices objectAtIndex:index];
     [bubble setNeedsDisplay];
 }
 
@@ -45,6 +51,38 @@
     return y;
 }
 
++ (NSMutableArray *)getColorPaletteChoices
+{
+    // load color palette choices
+    NSArray *pre = @[[UIColor robinEggColor], [UIColor emeraldColor], [UIColor babyBlueColor], [UIColor paleGreenColor], [UIColor palePurpleColor], [UIColor paleRoseColor], [UIColor lavenderColor], [UIColor periwinkleColor], [UIColor sandColor], [UIColor icebergColor], [UIColor coolGrayColor], [UIColor goldenrodColor], [UIColor peachColor], [UIColor carrotColor], [UIColor steelBlueColor], [UIColor moneyGreenColor], [UIColor fadedBlueColor], [UIColor warmGrayColor], [UIColor easterPinkColor], [UIColor turquoiseColor], [UIColor pastelOrangeColor], [UIColor black50PercentColor]];
+    return [NSMutableArray arrayWithArray:pre];
+}
 
++ (UIColor *)randomCentralColor
+{
+    NSMutableArray *colors = [self getColorPaletteChoices];
+    NSUInteger count = [colors count];
+    NSUInteger index = rand() % count;
+    return [colors objectAtIndex:index];
+}
+
++ (NSArray *)colorsInPalette:(UIColor *)centralColor
+{
+    NSArray *colorScheme = [centralColor colorSchemeOfType:ColorSchemeMonochromatic];
+    NSMutableArray *adjustedArray = [NSMutableArray arrayWithArray:colorScheme];
+    [adjustedArray addObject:centralColor];
+    return  [NSArray arrayWithArray:adjustedArray];
+}
 
 @end
+
+
+
+
+
+
+
+
+
+
+

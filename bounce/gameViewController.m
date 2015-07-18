@@ -8,6 +8,7 @@
 
 #import "gameViewController.h"
 #import "barView.h"
+#import "customHomeButtonView.h"
 #import "bubbleView.h"
 #import "killZoneView.h"
 #import "Globals.h"
@@ -21,6 +22,7 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
 @property (weak, nonatomic) IBOutlet UILabel *pauseLabel;
 @property (strong, nonatomic) IBOutlet UILabel *killZone;
 @property (weak, nonatomic) IBOutlet UIView *barRegion;
+@property (weak, nonatomic) IBOutlet customHomeButtonView *backButton;
 @property (strong, nonatomic) NSMutableArray *bubbleArray;
 @property (strong, nonatomic) barView *bar;
 @property (strong, nonatomic) NSTimer *timer;
@@ -35,8 +37,11 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
+    [self.backButton setTitleColor:[[super colorPalette] objectAtIndex:3]  forState:UIControlStateNormal];
+    
     CGFloat initialY = self.view.bounds.size.height - 70;
     self.bar = [[barView alloc] initWithFrame:CGRectMake(0, initialY, 80.0f, 8.0f)];
+    self.bar.barColor = [[super colorPalette] objectAtIndex:2];
     [self.view addSubview:self.bar];
     UITapGestureRecognizer *tappedbar =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapMoveBar:)];
     [self.barRegion addGestureRecognizer:tappedbar];
@@ -177,7 +182,7 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
 {
     bubbleView *newBubble = [[bubbleView alloc] initWithFrame:frame];
     // set colors of new patch
-    [Globals setBubbleColors:newBubble];
+    [Globals setBubbleColors:newBubble colorChoices:[super colorPalette]];
     return newBubble;
 }
 

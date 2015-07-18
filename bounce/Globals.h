@@ -11,9 +11,12 @@
 @class bubbleView;
 
 @interface Globals : NSObject
-+ (void)setBubbleColors:(bubbleView *)bubble;
++ (void)setBubbleColors:(bubbleView *)bubble colorChoices:(NSArray *)palette;
 + (CGFloat)randValBetw0And1;
 + (CGFloat)randomXLocation:(CGFloat)width;
 + (CGFloat)sideRandomXLocation:(CGFloat)margin;
 + (CGFloat)randomYLocation:(CGFloat)height;
++ (NSMutableArray *)getColorPaletteChoices;
++ (UIColor *)randomCentralColor;
++ (NSArray *)colorsInPalette:(UIColor *)centralColor;
 @end

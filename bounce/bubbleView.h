@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface bubbleView : UIView
-@property (nonatomic) CGFloat red;
-@property (nonatomic) CGFloat green;
-@property (nonatomic) CGFloat blue;
+@property (strong, nonatomic) UIColor *bubbleColor;
 @property (nonatomic) BOOL active;
 @property (nonatomic) BOOL hit;
 @end
