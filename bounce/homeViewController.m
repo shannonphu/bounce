@@ -7,6 +7,8 @@
 //
 
 #import "homeViewController.h"
+#import "gameViewController.h"
+#import "colorSchemeViewController.h"
 #import "bubbleView.h"
 #import "customHomeButtonView.h"
 #import "Globals.h"
@@ -30,7 +32,7 @@ CGFloat dimension = 12;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(rainBubbles) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(rainBubbles) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,14 +61,24 @@ CGFloat dimension = 12;
     [self.view addSubview:newBubble];
 }
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"homeToPlay"]) {
+        if ([segue.destinationViewController isKindOfClass:[gameViewController class]]) {
+            gameViewController *gameView = (gameViewController *)segue.destinationViewController;
+            [Globals setViewAttributes:gameView background:self.view.backgroundColor];
+        }
+    }
+    else if ([segue.identifier isEqualToString:@"homeToSettings"])
+    {
+        if ([segue.destinationViewController isKindOfClass:[colorSchemeViewController class]]) {
+            colorSchemeViewController *settingsView = (colorSchemeViewController *)segue.destinationViewController;
+            [Globals setViewAttributes:settingsView background:self.view.backgroundColor];
+        }
+    }
 }
-*/
+
 
 @end

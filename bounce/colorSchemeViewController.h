@@ -10,5 +10,5 @@
 #import "ViewController.h"
 
 @interface colorSchemeViewController : ViewController
-
+- (IBAction)randomizeColorScheme:(id)sender;
 @end

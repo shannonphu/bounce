@@ -11,6 +11,5 @@
 @interface ViewController : UIViewController
 @property (strong, nonatomic) UIColor *centralColor;
 @property (strong, nonatomic) NSArray *colorPalette;
-//- (void)setRandomColorPaletteForView;
 @end
 

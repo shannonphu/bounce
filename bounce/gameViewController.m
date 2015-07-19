@@ -7,6 +7,7 @@
 //
 
 #import "gameViewController.h"
+#import "homeViewController.h"
 #import "barView.h"
 #import "customHomeButtonView.h"
 #import "bubbleView.h"
@@ -231,14 +232,15 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
                      }];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"playToHome"]) {
+        if ([segue.destinationViewController isKindOfClass:[homeViewController class]]) {
+            homeViewController *homeView = (homeViewController *)segue.destinationViewController;
+            [Globals setViewAttributes:homeView background:self.view.backgroundColor];
+        }
+    }
 }
-*/
 
 @end

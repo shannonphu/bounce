@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "colorSchemeViewController.h"
 #import "Globals.h"
 #import "Colours.h"
 
@@ -21,11 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    defaultBackgroundColor = [UIColor steelBlueColor];
-    
-    // set up color scheme
-    self.centralColor = [UIColor lavenderColor];
+    self.centralColor = [UIColor steelBlueColor];
     self.colorPalette = [Globals colorsInPalette:self.centralColor];
     self.view.backgroundColor = [self.colorPalette lastObject];
 }
@@ -34,10 +31,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*- (void)setRandomColorPaletteForView
-{
-    self.centralColor = [Globals randomCentralColor];
-}*/
 
 @end

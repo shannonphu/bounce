@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @class bubbleView;
+@class ViewController;
 
 @interface Globals : NSObject
 + (void)setBubbleColors:(bubbleView *)bubble colorChoices:(NSArray *)palette;
@@ -19,4 +20,5 @@
 + (NSMutableArray *)getColorPaletteChoices;
 + (UIColor *)randomCentralColor;
 + (NSArray *)colorsInPalette:(UIColor *)centralColor;
++ (void)setViewAttributes:(ViewController *)vc background:(UIColor*)backgroundColor;
 @end

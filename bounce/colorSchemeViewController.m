@@ -10,6 +10,7 @@
 #import "customHomeButtonView.h"
 #import "Colours.h"
 #import "Globals.h"
+#import "homeViewController.h"
 
 @interface colorSchemeViewController ()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttonArray;
@@ -21,14 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.backButton setTitleColor:[[super colorPalette] objectAtIndex:3]  forState:UIControlStateNormal];
-    UIColor *baseColor = [super centralColor];
-    NSArray *colorScheme = [Globals colorsInPalette:baseColor];
-    int i = 0;
-    for (UIButton *b in self.buttonArray) {
-        b.backgroundColor = [colorScheme objectAtIndex:i];
-        i++;
-    }
+    [self updateUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,14 +30,41 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+- (void) updateUI
+{
+    [self.backButton setTitleColor:[self.colorPalette objectAtIndex:3]  forState:UIControlStateNormal];
+    NSArray *colorScheme = [Globals colorsInPalette:self.centralColor];
+    int i = 0;
+    for (UIButton *b in self.buttonArray) {
+        b.backgroundColor = [colorScheme objectAtIndex:i];
+        i++;
+    }
+}
+
+- (void)setCentralAndPaletteColors:(UIColor *)color
+{
+    self.centralColor = color;
+    self.colorPalette = [Globals colorsInPalette:color];
+}
+
+
+- (IBAction)randomizeColorScheme:(id)sender {
+    self.view.backgroundColor = [Globals randomCentralColor];
+    [self setCentralAndPaletteColors:self.view.backgroundColor];
+    [self updateUI];
+}
+
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"settingsToHome"]) {
+        if ([segue.destinationViewController isKindOfClass:[homeViewController class]]) {
+            homeViewController *homeView = (homeViewController *)segue.destinationViewController;
+            [Globals setViewAttributes:homeView background:self.view.backgroundColor];
+        }
+    }
 }
-*/
+
 
 @end

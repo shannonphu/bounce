@@ -11,6 +11,7 @@
 #import "barView.h"
 #import "Colours.h"
 #import "ViewController.h"
+#import "customHomeButtonView.h"
 
 @interface Globals ()
 
@@ -25,7 +26,7 @@
 
 + (void)setBubbleColors:(bubbleView *)bubble colorChoices:(NSArray *)palette
 {
-    NSMutableArray *bubbleColorChoices = [NSMutableArray arrayWithObjects:palette.firstObject, [palette objectAtIndex:1], [palette objectAtIndex:2], [UIColor linenColor], [UIColor grayColor], nil];
+    NSMutableArray *bubbleColorChoices = [[NSMutableArray alloc] initWithObjects: palette.firstObject, [palette objectAtIndex:1], [palette objectAtIndex:2], [UIColor colorWithWhite:5 alpha:0.5], [UIColor grayColor], nil];
     NSUInteger index = rand() % [bubbleColorChoices count];
     bubble.bubbleColor = [bubbleColorChoices objectAtIndex:index];
     [bubble setNeedsDisplay];
@@ -72,6 +73,20 @@
     NSMutableArray *adjustedArray = [NSMutableArray arrayWithArray:colorScheme];
     [adjustedArray addObject:centralColor];
     return  [NSArray arrayWithArray:adjustedArray];
+}
+
++ (void)setViewAttributes:(ViewController *)vc background:(UIColor*)backgroundColor
+{
+    vc.view.backgroundColor = backgroundColor;
+    vc.centralColor = backgroundColor;
+    vc.colorPalette = [Globals colorsInPalette:backgroundColor];
+    for (UIView *view in vc.view.subviews) {
+        if ([view isKindOfClass:[customHomeButtonView class]])
+        {
+            UIButton *button = (UIButton *)view;
+            [button setTitleColor:[vc.colorPalette objectAtIndex:3]  forState:UIControlStateNormal];
+        }
+    }
 }
 
 @end
