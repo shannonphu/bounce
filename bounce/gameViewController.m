@@ -20,6 +20,12 @@ int maxBubblesAllowed = 10;
 NSTimeInterval timeBetweenBubbleDrops = 1.5;
 
 @interface gameViewController () <UIGestureRecognizerDelegate>
+{
+    int tenthSeconds;
+}
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (nonatomic) int score;
 @property (weak, nonatomic) IBOutlet UILabel *pauseLabel;
 @property (strong, nonatomic) IBOutlet UILabel *killZone;
 @property (weak, nonatomic) IBOutlet UIView *barRegion;
@@ -46,20 +52,14 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
     [self.view addSubview:self.bar];
     UITapGestureRecognizer *tappedbar =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapMoveBar:)];
     [self.barRegion addGestureRecognizer:tappedbar];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:timeBetweenBubbleDrops target:self selector:@selector(play) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:timeBetweenBubbleDrops target:self selector:@selector(play) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(checkCollision) userInfo:nil repeats:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self setupGame];
 }
-
 - (void)viewDidAppear:(BOOL)animated
 {
     self.pauseLabel.alpha = 0;
@@ -70,6 +70,20 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
                      animations:^{
                          self.pauseLabel.alpha = 1;
                      } completion:nil];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)incrementTimerSeconds
+{
+    tenthSeconds++;
+    int tenths = tenthSeconds % 10;
+    int seconds = (tenthSeconds / 10) % 60;
+    int minutes = tenthSeconds / 600;
+    self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%d",minutes, seconds, tenths];
 }
 
 - (NSMutableArray *)bubbleArray
@@ -102,6 +116,7 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
                              [self.pauseLabel removeFromSuperview];
                          }];
         self.paused = NO;
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(incrementTimerSeconds) userInfo:nil repeats:YES];
     }
 }
 
@@ -125,6 +140,7 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
     if (self.paused == NO) {
         [self addBubble];
     }
+    [self updateScoreLabel];
 }
 
 - (void)checkCollision
@@ -135,7 +151,6 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
         
         if(CGRectIntersectsRect(bubbleLayer.frame, barLayer.frame))
         {
-            //[self pauseLayer:bubbleLayer];
             bubble.hit = YES;
             [self reboundBubble:bubble];
             continue;
@@ -171,11 +186,14 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
 - (int)numActiveBubbles
 {
     int active = 0;
+    int inactive = 0;
     for (bubbleView *bubble in self.bubbleArray) {
-        if (bubble.active) {
+        if (bubble.active)
             active++;
-        }
+        else
+            inactive++;
     }
+    self.score = active * inactive * 5 - inactive * 2;
     return active;
 }
 
@@ -230,6 +248,11 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
                      } completion:^(BOOL finished) {
                          [self fallBubble:bubble xLocation:bubble.center.x];
                      }];
+}
+
+- (void)updateScoreLabel
+{
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
 }
 
 #pragma mark - Navigation
