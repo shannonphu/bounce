@@ -69,14 +69,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color Scheme Options" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jJ7-aJ-qbQ">
-                                <rect key="frame" x="16" y="185" width="97" height="82"/>
+                                <rect key="frame" x="38" y="185" width="101" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="21"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tCe-wr-rgb">
+                                <rect key="frame" x="38" y="269" width="101" height="279"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.25" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FjF-Vp-qhP">
-                                <rect key="frame" x="16" y="281" width="97" height="40"/>
+                                <rect key="frame" x="38" y="517" width="101" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
                                 <state key="normal" title="Randomize">
@@ -86,16 +94,126 @@
                                     <action selector="randomizeColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="hPq-Bm-FYd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MGy-6c-yDC">
+                                <rect key="frame" x="42" y="273" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="mca-RC-JH2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SxI-5C-p3Z">
+                                <rect key="frame" x="90" y="273" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="7bK-oa-7Ku"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sfu-8W-yST">
+                                <rect key="frame" x="42" y="321" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="4h4-wF-PxB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0ok-7Q-bTm">
+                                <rect key="frame" x="90" y="321" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="hcN-yC-WRk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7fQ-G6-jyY">
+                                <rect key="frame" x="42" y="370" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="lET-ci-lp3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jR9-Fl-aqj">
+                                <rect key="frame" x="90" y="370" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="U0o-da-2FF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kkD-o9-kbm">
+                                <rect key="frame" x="42" y="418" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="XoF-md-JdL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cQh-ll-1bH">
+                                <rect key="frame" x="90" y="418" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="2yf-vS-oid"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vUS-tJ-Jxf">
+                                <rect key="frame" x="42" y="466" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="EL6-9Z-nYS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dZg-pa-HGz">
+                                <rect key="frame" x="90" y="466" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseParticularColorScheme:" destination="Coe-YP-XVS" eventType="touchUpInside" id="9iZ-Mc-40f"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="fOS-Cp-ajh"/>
                     <connections>
                         <outlet property="backButton" destination="tEf-z0-gB0" id="WUv-yP-yZh"/>
-                        <outletCollection property="buttonArray" destination="zDD-lg-PBN" id="wiq-zy-xbq"/>
-                        <outletCollection property="buttonArray" destination="5Zc-85-eC8" id="JOp-ow-lTP"/>
-                        <outletCollection property="buttonArray" destination="gDG-tc-pV0" id="R3y-Te-ME0"/>
-                        <outletCollection property="buttonArray" destination="3P2-8n-R1i" id="yd2-QO-mdH"/>
+                        <outletCollection property="paletteButtonArray" destination="zDD-lg-PBN" id="ZfJ-Ha-eDP"/>
+                        <outletCollection property="paletteButtonArray" destination="5Zc-85-eC8" id="J2K-fv-85G"/>
+                        <outletCollection property="paletteButtonArray" destination="gDG-tc-pV0" id="rwL-j2-w7L"/>
+                        <outletCollection property="paletteButtonArray" destination="3P2-8n-R1i" id="tA2-YI-OX7"/>
+                        <outletCollection property="randomColorButtonArray" destination="MGy-6c-yDC" id="qqe-lo-NVL"/>
+                        <outletCollection property="randomColorButtonArray" destination="SxI-5C-p3Z" id="lW7-Yl-NMG"/>
+                        <outletCollection property="randomColorButtonArray" destination="Sfu-8W-yST" id="I90-0P-JUD"/>
+                        <outletCollection property="randomColorButtonArray" destination="0ok-7Q-bTm" id="P2l-ZZ-aGj"/>
+                        <outletCollection property="randomColorButtonArray" destination="7fQ-G6-jyY" id="yQg-W4-ujx"/>
+                        <outletCollection property="randomColorButtonArray" destination="jR9-Fl-aqj" id="fMU-hh-2bO"/>
+                        <outletCollection property="randomColorButtonArray" destination="kkD-o9-kbm" id="eDV-aT-ROt"/>
+                        <outletCollection property="randomColorButtonArray" destination="cQh-ll-1bH" id="WJH-lj-WhM"/>
+                        <outletCollection property="randomColorButtonArray" destination="vUS-tJ-Jxf" id="LGG-A7-JPN"/>
+                        <outletCollection property="randomColorButtonArray" destination="dZg-pa-HGz" id="vO2-nR-MML"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A5J-g2-zc9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,7 +384,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Qr8-nK-idD"/>
+        <segue reference="yTR-1W-2C4"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
 </document>

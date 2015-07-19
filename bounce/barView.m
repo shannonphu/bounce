@@ -22,7 +22,6 @@
 - (void)drawRect:(CGRect)rect {
     UIBezierPath *bar = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:15];
     [bar addClip];
-    //self.barColor = [UIColor colorWithRed:255/255.0f green:256/255.0f blue:213/255.0f alpha:1.0f];
     [self.barColor setFill];
     [bar fill];
 }

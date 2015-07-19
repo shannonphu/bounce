@@ -8,6 +8,7 @@
 
 #import "homeViewController.h"
 #import "gameViewController.h"
+#import "barView.h"
 #import "colorSchemeViewController.h"
 #import "bubbleView.h"
 #import "customHomeButtonView.h"
@@ -69,6 +70,7 @@ CGFloat dimension = 12;
         if ([segue.destinationViewController isKindOfClass:[gameViewController class]]) {
             gameViewController *gameView = (gameViewController *)segue.destinationViewController;
             [Globals setViewAttributes:gameView background:self.view.backgroundColor];
+            gameView.bar.barColor = [self.colorPalette objectAtIndex:1];
         }
     }
     else if ([segue.identifier isEqualToString:@"homeToSettings"])

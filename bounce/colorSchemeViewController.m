@@ -13,7 +13,8 @@
 #import "homeViewController.h"
 
 @interface colorSchemeViewController ()
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttonArray;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *paletteButtonArray;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *randomColorButtonArray;
 @property (weak, nonatomic) IBOutlet customHomeButtonView *backButton;
 @end
 
@@ -34,10 +35,27 @@
 {
     [self.backButton setTitleColor:[self.colorPalette objectAtIndex:3]  forState:UIControlStateNormal];
     NSArray *colorScheme = [Globals colorsInPalette:self.centralColor];
+    
+    // set colors of color palette bar under settings title
     int i = 0;
-    for (UIButton *b in self.buttonArray) {
+    for (UIButton *b in self.paletteButtonArray)
+    {
         b.backgroundColor = [colorScheme objectAtIndex:i];
         i++;
+    }
+    
+    // get all possible central colors
+    NSMutableArray *allColors = [[NSMutableArray alloc] initWithArray:[Globals getColorPaletteChoices]];
+    [allColors removeObject:self.view.backgroundColor];
+    for (int i = 0; i < [allColors count] - [self.randomColorButtonArray count]; i++) {
+        [allColors removeObjectAtIndex:(rand()%[self.randomColorButtonArray count])];
+    }
+    
+    // set button colors as each color in altered array of all other colors
+    for (UIButton *button in self.randomColorButtonArray) {
+        UIColor *chosenColor = [allColors objectAtIndex:(rand()%[allColors count])];
+        button.backgroundColor = chosenColor;
+        [allColors removeObject:chosenColor];
     }
 }
 
@@ -54,6 +72,12 @@
     [self updateUI];
 }
 
+- (IBAction)chooseParticularColorScheme:(id)sender {
+    UIButton *button = sender;
+    self.view.backgroundColor = button.backgroundColor;
+    [self setCentralAndPaletteColors:self.view.backgroundColor];
+    [self updateUI];
+}
 
 #pragma mark - Navigation
 

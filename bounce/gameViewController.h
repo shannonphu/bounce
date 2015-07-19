@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #include "ViewController.h"
+@class  barView;
 
 @interface gameViewController : ViewController
 @property (nonatomic) BOOL paused;
+@property (strong, nonatomic) barView *bar;
 @end

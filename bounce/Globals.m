@@ -55,7 +55,7 @@
 + (NSMutableArray *)getColorPaletteChoices
 {
     // load color palette choices
-    NSArray *pre = @[[UIColor robinEggColor], [UIColor emeraldColor], [UIColor babyBlueColor], [UIColor paleGreenColor], [UIColor palePurpleColor], [UIColor paleRoseColor], [UIColor lavenderColor], [UIColor periwinkleColor], [UIColor sandColor], [UIColor icebergColor], [UIColor coolGrayColor], [UIColor goldenrodColor], [UIColor peachColor], [UIColor carrotColor], [UIColor steelBlueColor], [UIColor moneyGreenColor], [UIColor fadedBlueColor], [UIColor warmGrayColor], [UIColor easterPinkColor], [UIColor turquoiseColor], [UIColor pastelOrangeColor], [UIColor black50PercentColor]];
+    NSArray *pre = @[[UIColor robinEggColor], [UIColor emeraldColor], [UIColor babyBlueColor], [UIColor paleGreenColor], [UIColor palePurpleColor], [UIColor paleRoseColor], [UIColor lavenderColor], [UIColor periwinkleColor], [UIColor sandColor], [UIColor icebergColor], [UIColor coolGrayColor], [UIColor goldenrodColor], [UIColor peachColor], [UIColor carrotColor], [UIColor steelBlueColor], [UIColor moneyGreenColor], [UIColor fadedBlueColor], [UIColor warmGrayColor], [UIColor easterPinkColor], [UIColor turquoiseColor], [UIColor pastelOrangeColor], [UIColor black50PercentColor], [UIColor brickRedColor], [UIColor plumColor], [UIColor coralColor], [UIColor mustardColor], [UIColor burntOrangeColor]];
     return [NSMutableArray arrayWithArray:pre];
 }
 

@@ -31,7 +31,6 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
 @property (weak, nonatomic) IBOutlet UIView *barRegion;
 @property (weak, nonatomic) IBOutlet customHomeButtonView *backButton;
 @property (strong, nonatomic) NSMutableArray *bubbleArray;
-@property (strong, nonatomic) barView *bar;
 @property (strong, nonatomic) NSTimer *timer;
 @end
 
@@ -48,7 +47,7 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
     
     CGFloat initialY = self.view.bounds.size.height - 70;
     self.bar = [[barView alloc] initWithFrame:CGRectMake(0, initialY, 80.0f, 8.0f)];
-    self.bar.barColor = [[super colorPalette] objectAtIndex:2];
+    self.bar.barColor = [self.colorPalette objectAtIndex:1];
     [self.view addSubview:self.bar];
     UITapGestureRecognizer *tappedbar =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapMoveBar:)];
     [self.barRegion addGestureRecognizer:tappedbar];
