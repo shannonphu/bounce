@@ -38,13 +38,7 @@
     [self.backButton setTitleColor:[self.colorPalette objectAtIndex:3]  forState:UIControlStateNormal];
     NSArray *colorScheme = [Globals colorsInPalette:self.centralColor];
     
-    // set colors of color palette bar under settings title
-    int i = 0;
-    for (UIButton *b in self.paletteButtonArray)
-    {
-        b.backgroundColor = [colorScheme objectAtIndex:i];
-        i++;
-    }
+    [self colorSettingsUnderline:colorScheme];
     
     // get all possible central colors
     NSMutableArray *allColors = [[NSMutableArray alloc] initWithArray:[Globals getColorPaletteChoices]];
@@ -58,6 +52,17 @@
         UIColor *chosenColor = [allColors objectAtIndex:(rand()%[allColors count])];
         button.backgroundColor = chosenColor;
         [allColors removeObject:chosenColor];
+    }
+}
+
+- (void)colorSettingsUnderline:(NSArray *)palette
+{
+    // set colors of color palette bar under settings title
+    int i = 0;
+    for (UIButton *b in self.paletteButtonArray)
+    {
+        b.backgroundColor = [palette objectAtIndex:i];
+        i++;
     }
 }
 

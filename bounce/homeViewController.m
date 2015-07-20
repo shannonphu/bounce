@@ -82,9 +82,9 @@ CGFloat dimension = 12;
         if ([segue.destinationViewController isKindOfClass:[colorSchemeViewController class]]) {
             colorSchemeViewController *settingsView = (colorSchemeViewController *)segue.destinationViewController;
             [Globals setViewAttributes:settingsView background:self.view.backgroundColor];
+            [settingsView colorSettingsUnderline:self.colorPalette];
         }
     }
 }
-
 
 @end

@@ -11,4 +11,5 @@
 
 @interface colorSchemeViewController : ViewController
 - (IBAction)randomizeColorScheme:(id)sender;
+- (void)colorSettingsUnderline:(NSArray *)palette;
 @end

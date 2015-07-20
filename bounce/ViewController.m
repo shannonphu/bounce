@@ -15,7 +15,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.centralColor = [UIColor steelBlueColor];
+    self.centralColor = [UIColor carrotColor];
     self.colorPalette = [Globals colorsInPalette:self.centralColor];
     self.view.backgroundColor = [self.colorPalette lastObject];
 }
