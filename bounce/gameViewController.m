@@ -14,44 +14,70 @@
 #import "killZoneView.h"
 #import "Globals.h"
 
-CGFloat bubbleDimension = 18.0f;
-NSTimeInterval normalDropTime = 1.8;
-int maxBubblesAllowed = 10;
-NSTimeInterval timeBetweenBubbleDrops = 1.5;
+// BUBBLE INFO
+CGFloat BUBBLE_DIMENSIONS = 18.0f;
+const int MAXBUBBLES = 10;
 
-@interface gameViewController () <UIGestureRecognizerDelegate>
-{
+// SCORES INFO
+const int LOST_BUBBLE_PENALTY = 5;
+const int REBOUND_BUBBLE_BONUS = 3;
+const int ACTIVE_BUBBLE_BONUS = 1.5;
+
+// ANIMATION INFO
+NSTimeInterval DROP_TIME = 1;
+NSTimeInterval TIME_BETW_BUBBLE_DROPS = 1.5;
+NSUInteger ANIMATION_OPTION = UIViewAnimationOptionCurveEaseInOut;
+
+
+@interface gameViewController () <UIGestureRecognizerDelegate> {
     int tenthSeconds;
 }
+
+// UI LABELS and BUTTONS
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (nonatomic) int score;
 @property (weak, nonatomic) IBOutlet UILabel *pauseLabel;
+@property (weak, nonatomic) IBOutlet customHomeButtonView *backButton;
+
+// SCORE PROPERTY
+@property (nonatomic) int score;
+
+// REGIONS TO DETECT BUBBLES IN
 @property (strong, nonatomic) IBOutlet UILabel *killZone;
 @property (weak, nonatomic) IBOutlet UIView *barRegion;
-@property (weak, nonatomic) IBOutlet customHomeButtonView *backButton;
+
+// ARRAY FOR ALL BUBBLES MADE
 @property (strong, nonatomic) NSMutableArray *bubbleArray;
-@property (strong, nonatomic) NSTimer *timer;
+
 @end
+
 
 @implementation gameViewController
 
-@synthesize bar = _bar;
-@synthesize bubbleArray = _bubbleArray;
+#pragma mark - View Set-Up
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // Set Storyboard Features
     self.navigationController.navigationBarHidden = YES;
     [self.backButton setTitleColor:[[super colorPalette] objectAtIndex:3]  forState:UIControlStateNormal];
     
+    // Bar Position Set-up
     CGFloat initialY = self.view.bounds.size.height - 70;
-    self.bar = [[barView alloc] initWithFrame:CGRectMake(0, initialY, 80.0f, 8.0f)];
+    _bar = [[barView alloc] initWithFrame:CGRectMake(0, initialY, 80.0f, 8.0f)];
     self.bar.barColor = [self.colorPalette objectAtIndex:1];
     [self.view addSubview:self.bar];
+    
+    // Bubble Array Initialization
+    _bubbleArray = [[NSMutableArray alloc] init];
+    
+    // Gesture Set-up
     UITapGestureRecognizer *tappedbar =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapMoveBar:)];
     [self.barRegion addGestureRecognizer:tappedbar];
-    [NSTimer scheduledTimerWithTimeInterval:timeBetweenBubbleDrops target:self selector:@selector(play) userInfo:nil repeats:YES];
+    
+    // Timer Set-up
+    [NSTimer scheduledTimerWithTimeInterval:TIME_BETW_BUBBLE_DROPS target:self selector:@selector(play) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(checkCollision) userInfo:nil repeats:YES];
 }
 
@@ -59,6 +85,15 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
 {
     [self setupGame];
 }
+
+- (void)setupGame
+{
+    self.bar.center = CGPointMake(self.view.bounds.size.width / 2, self.bar.center.y);
+    self.paused = YES;
+    self.pauseLabel.hidden = YES;
+    [self play];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     self.pauseLabel.alpha = 0;
@@ -71,10 +106,22 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
                      } completion:nil];
 }
 
+- (void)updateScoreLabel
+{
+    int active = [self numActiveBubbles];
+    self.score += ACTIVE_BUBBLE_BONUS * active;
+    self.score -= ((int)[self.bubbleArray count] - active);
+    if (self.score < 0)
+        self.score = 0;
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Timer Info
 
 - (void)incrementTimerSeconds
 {
@@ -85,21 +132,7 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
     self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%d",minutes, seconds, tenths];
 }
 
-- (NSMutableArray *)bubbleArray
-{
-    if (!_bubbleArray) {
-        _bubbleArray = [[NSMutableArray alloc] init];
-    }
-    return _bubbleArray;
-}
-
-- (void)setupGame
-{
-    self.bar.center = CGPointMake(self.view.bounds.size.width / 2, self.bar.center.y);
-    self.paused = YES;
-    self.pauseLabel.hidden = YES;
-    [self play];
-}
+#pragma mark - Touch Handlers
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -115,7 +148,7 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
                              [self.pauseLabel removeFromSuperview];
                          }];
         self.paused = NO;
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(incrementTimerSeconds) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(incrementTimerSeconds) userInfo:nil repeats:YES];
     }
 }
 
@@ -134,6 +167,8 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
     }
 }
 
+#pragma mark - Play Details
+
 - (void)play
 {
     if (self.paused == NO) {
@@ -151,13 +186,13 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
         if(CGRectIntersectsRect(bubbleLayer.frame, barLayer.frame))
         {
             bubble.hit = YES;
-            [self reboundBubble:bubble];
             continue;
         }
         
+        // if missed hit, suck bubble down off screen else rebound will execute in fallBubble's finished block
         if (CGRectIntersectsRect(bubbleLayer.frame, self.killZone.frame) || [self bubbleOutOfView:bubble]) {
             bubble.hit = NO;
-            CGRect fin = CGRectMake(bubble.center.x, self.view.bounds.size.height, bubbleDimension, bubbleDimension);
+            CGRect fin = CGRectMake(bubble.center.x, self.view.bounds.size.height, BUBBLE_DIMENSIONS, BUBBLE_DIMENSIONS);
             [UIView animateWithDuration:0.5
                                   delay:0
                  usingSpringWithDamping:0.8
@@ -188,13 +223,48 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
     int inactive = 0;
     for (bubbleView *bubble in self.bubbleArray) {
         if (bubble.active)
+        {
             active++;
+            self.score += bubble.numRebounds * REBOUND_BUBBLE_BONUS;
+        }
         else
+        {
             inactive++;
+        }
     }
-    self.score = active * inactive * 5 - inactive * 2;
     return active;
 }
+
+- (void)fallBubble:(bubbleView *)bubble xLocation:(CGFloat)xLocation
+{
+    [UIView animateWithDuration:DROP_TIME * ([Globals randValBetw0And1] / 2 + 0.5)
+                          delay:0
+                        options: ANIMATION_OPTION
+                     animations:^{
+                         CGRect fin = CGRectMake(xLocation, self.view.bounds.size.height - 80, BUBBLE_DIMENSIONS, BUBBLE_DIMENSIONS);
+                         bubble.frame = fin;
+                     }
+                     completion:^(BOOL finished) {
+                        [self reboundBubble:bubble xLocation:xLocation];
+                     }];
+}
+
+- (void)reboundBubble:(bubbleView *)bubble xLocation:(CGFloat)xLocation
+{
+    bubble.numRebounds++;
+    [UIView animateWithDuration:DROP_TIME * ([Globals randValBetw0And1] / 2 + 0.5)
+                          delay:0
+                        options: ANIMATION_OPTION
+                     animations:^{
+                         CGRect start = CGRectMake(xLocation, 0.5 * [Globals randValBetw0And1] * self.view.bounds.size.height, BUBBLE_DIMENSIONS, BUBBLE_DIMENSIONS);
+                         bubble.frame = start;
+                     }
+                     completion:^(BOOL finished) {
+                         [self fallBubble:bubble xLocation:xLocation];
+                     }];
+}
+
+#pragma mark - Bubble Forming
 
 - (bubbleView *)makeBubbleAtFrame:(CGRect)frame
 {
@@ -206,52 +276,18 @@ NSTimeInterval timeBetweenBubbleDrops = 1.5;
 
 - (void)addBubble
 {
-    if ([self numActiveBubbles] < maxBubblesAllowed) {
+    if ([self numActiveBubbles] < MAXBUBBLES) {
         __weak gameViewController* weakSelf = self;
         __block bubbleView *newBubble;
-        // create random origin and have bubble to be bubbleDimension size
+        // create random origin and have bubble to be BUBBLE_DIMENSIONS size
         CGFloat xLocation = [Globals randomXLocation:self.view.bounds.size.width];
-        CGRect start = CGRectMake(xLocation, 0, bubbleDimension, bubbleDimension);
+        CGRect start = CGRectMake(xLocation, 0, BUBBLE_DIMENSIONS, BUBBLE_DIMENSIONS);
         newBubble = [weakSelf makeBubbleAtFrame:start];
         [self.bubbleArray addObject:newBubble];
         [self fallBubble:newBubble xLocation:xLocation];
         // add subview
         [self.view addSubview:newBubble];
     }
-}
-
-- (void)fallBubble:(bubbleView *)bubble xLocation:(CGFloat)xLocation
-{
-    CGRect fin = CGRectMake(xLocation, self.view.bounds.size.height - 90, bubbleDimension, bubbleDimension);
-    
-    [UIView animateWithDuration:normalDropTime
-                          delay:0
-         usingSpringWithDamping:0.75
-          initialSpringVelocity:1.2
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         bubble.frame = fin;
-                     }
-                     completion:^(BOOL finished) {
-                         //Completion Block
-                     }];
-}
-
-- (void)reboundBubble:(bubbleView *)bubble
-{
-    CGFloat newY = [Globals randomYLocation:self.view.bounds.size.height];
-    CGRect fin = CGRectMake(bubble.center.x - 7, newY, bubbleDimension, bubbleDimension);
-    [UIView animateWithDuration:normalDropTime
-                     animations:^{
-                         bubble.frame = fin;
-                     } completion:^(BOOL finished) {
-                         [self fallBubble:bubble xLocation:bubble.center.x];
-                     }];
-}
-
-- (void)updateScoreLabel
-{
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
 }
 
 #pragma mark - Navigation

@@ -20,6 +20,8 @@
 
 @implementation colorSchemeViewController
 
+#pragma mark - View Set-Up
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -59,12 +61,13 @@
     }
 }
 
+#pragma mark - Color Scheme Set-up
+
 - (void)setCentralAndPaletteColors:(UIColor *)color
 {
     self.centralColor = color;
     self.colorPalette = [Globals colorsInPalette:color];
 }
-
 
 - (IBAction)randomizeColorScheme:(id)sender {
     self.view.backgroundColor = [Globals randomCentralColor];

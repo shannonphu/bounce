@@ -11,13 +11,6 @@
 #import "Globals.h"
 #import "Colours.h"
 
-
-@interface ViewController ()
-{
-    UIColor *defaultBackgroundColor;
-}
-@end
-
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -29,7 +22,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

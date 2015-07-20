@@ -12,4 +12,5 @@
 @property (strong, nonatomic) UIColor *bubbleColor;
 @property (nonatomic) BOOL active;
 @property (nonatomic) BOOL hit;
+@property (nonatomic) int numRebounds;
 @end

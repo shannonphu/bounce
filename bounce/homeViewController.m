@@ -23,6 +23,8 @@ CGFloat dimension = 12;
 
 @implementation homeViewController
 
+#pragma mark - View Set-Up
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -40,6 +42,8 @@ CGFloat dimension = 12;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Background Effect
 
 - (void)rainBubbles
 {

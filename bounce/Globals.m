@@ -13,23 +13,18 @@
 #import "ViewController.h"
 #import "customHomeButtonView.h"
 
-@interface Globals ()
-
-@end
-
 @implementation Globals
+
+#pragma mark - Random Number Generators
 
 + (CGFloat)randValBetw0And1
 {
     return (CGFloat)rand()/RAND_MAX;
 }
 
-+ (void)setBubbleColors:(bubbleView *)bubble colorChoices:(NSArray *)palette
++ (CGFloat)randValBetwHalfand1
 {
-    NSMutableArray *bubbleColorChoices = [[NSMutableArray alloc] initWithObjects: palette.firstObject, [palette objectAtIndex:1], [palette objectAtIndex:2], [UIColor colorWithWhite:5 alpha:0.5], [UIColor grayColor], nil];
-    NSUInteger index = rand() % [bubbleColorChoices count];
-    bubble.bubbleColor = [bubbleColorChoices objectAtIndex:index];
-    [bubble setNeedsDisplay];
+    return (CGFloat)rand()/RAND_MAX;
 }
 
 + (CGFloat)randomXLocation:(CGFloat)width
@@ -52,6 +47,8 @@
     return y;
 }
 
+#pragma mark - Color Handler
+
 + (NSMutableArray *)getColorPaletteChoices
 {
     // load color palette choices
@@ -73,6 +70,16 @@
     NSMutableArray *adjustedArray = [NSMutableArray arrayWithArray:colorScheme];
     [adjustedArray addObject:centralColor];
     return  [NSArray arrayWithArray:adjustedArray];
+}
+
+#pragma mark - Color Setter
+
++ (void)setBubbleColors:(bubbleView *)bubble colorChoices:(NSArray *)palette
+{
+    NSMutableArray *bubbleColorChoices = [[NSMutableArray alloc] initWithObjects: palette.firstObject, [palette objectAtIndex:1], [palette objectAtIndex:2], [UIColor colorWithWhite:5 alpha:0.5], [UIColor grayColor], nil];
+    NSUInteger index = rand() % [bubbleColorChoices count];
+    bubble.bubbleColor = [bubbleColorChoices objectAtIndex:index];
+    [bubble setNeedsDisplay];
 }
 
 + (void)setViewAttributes:(ViewController *)vc background:(UIColor*)backgroundColor
